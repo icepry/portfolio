@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titre de la Page</title>
+    <meta name="description" content="Une brève description de la page">
+    <link rel="stylesheet" href="page sponsor.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Leaflet.js pour la carte -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+</head>
+
+<body>
+    <!-- En-tête de la page -->
+    <header>
+        <div class="logo">
+            <img src="logo-cjd-social.png" alt="Logo de la page">
+        </div>
+        <div class="h1-container">
+            <img src="th.jpg" alt="Image ronde" class="header-image">
+            <h1>CREDIT AGRICOLE</h1>
+        </div>
+        <div class="right-section">Organisé par le CJD</div>
+    </header>
+
+    <!-- Section principale -->
+    <main>
+        <div class="container">
+            <!-- Section 1 avec division en deux (image et texte) -->
+            <section id="section1">
+                <!-- Conteneur de l'image à gauche -->
+                <div class="section1-image">
+                    <img src="S.jpg" alt="Image de sponsor">
+                </div>
+                <!-- Conteneur du texte à droite -->
+                <div class="section1-text">
+                    <h2>CREDIT AGRICOLE "Le Crédit Agricole, banque de proximité"</h2>
+                    <p>
+                        Le Crédit Agricole est l'un des plus grands groupes bancaires en France, reconnu pour son engagement dans l'accompagnement des particuliers, des entreprises et des collectivités. Fondé en 1894, il s'est progressivement imposé comme un acteur clé du secteur bancaire, à la fois par sa présence locale et son approche innovante. Organisé autour d'une structure coopérative, le Crédit Agricole repose sur un modèle de gouvernance participatif, où les sociétaires ont un rôle important. Aujourd'hui, il offre une large gamme de services financiers, incluant des solutions de banque de détail, d'assurance, d'épargne, ainsi que des services spécialisés pour les professionnels et les agriculteurs. Le groupe met un accent particulier sur la relation humaine et la proximité avec ses clients, tout en se positionnant comme un acteur responsable et engagé dans le développement durable.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Nouvelle Section ajoutée juste en dessous de "Nom sponsor (slogan)" -->
+            <section id="new-section">
+                <h2>Engagement et réalisation RSE</h2>
+                <p>
+                    #1 - Atteindre la neutralité carbone d’ici 2050<br>
+                    #2 - Conseiller et accompagner 100% de nos clients dans leur transition énergétique<br>
+                    #3 - Intégrer des critères de performance extra-financière dans 100% de l’analyse de nos financements aux entreprises et aux agriculteurs<br>
+                    #4 Proposer une gamme d'offres qui n'exclut aucun client, pour favoriser l'inclusion sociale et numérique et s'adapter aux évolutions économiques et sociétales<br>
+                    #5 Contribuer à redynamiser les territoires les plus fragilisés et réduire les inégalités sociales en matière économique, sociale, et de lutte contre la désertification<br>
+                    #6 Favoriser l'insertion des jeunes par l'emploi et la formation<br>
+                    #7 Amplifier la mixité et la diversité dans toutes les entités du Crédit Agricole ainsi qu'au sein de sa gouvernance<br>
+                    #8 Dans un contexte de changement climatique impactant la biodiversité, accompagner l'évolution des techniques vers un système agro-alimentaire compétitif et durable<br>
+                    #9 Permettre à l'agriculture française de contribuer pleinement à la lutte contre le changement climatique<br>
+                    #10 Contribuer à renforcer la souveraineté alimentaire<br>
+                </p>
+            </section>
+
+            <!-- Formulaire de réservation avec les images -->
+            <div class="images-container">
+                <div class="image-left">
+                    <img src="th2.jpg" alt="Image gauche">
+                </div>
+                <aside class="form-container">
+                    <h2>Formulaire de Réservation</h2>
+                    <form action="reservations.php" method="post" id="reservationForm">
+                        <div class="form-group">
+                            <label for="nom">Nom :</label>
+                            <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="prenom">Prénom :</label>
+                            <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email :</label>
+                            <input type="email" id="email" name="email" placeholder="Votre email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telephone">Numéro de téléphone :</label>
+                            <input type="tel" id="telephone" name="telephone" placeholder="Votre numéro de téléphone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="number">Nombre de places :</label>
+                            <input type="number" id="number" name="number" min="1" max="10" step="1" value="1">
+                        </div>
+                        
+                        <div id="extra-fields"></div> <!-- Ajout des champs dynamiques ici -->
+                    
+                        <button type="submit">Réserver</button>                    
+                    </form>
+                </aside>
+                <div class="image-right">
+                    <img src="droite.png" alt="Image droite">
+                </div>
+            </div>
+        </div>
+<!-- Point GPS (carte) sous le formulaire -->
+<div class="image-right">
+    <div id="map"></div>
+</div>
+</div>
+
+    </main>
+
+    <!-- Bas de page -->
+    <footer>
+        <p>&copy; 2025 Dubois Alexandre - règles de confidentialité</p>
+    </footer>
+    
+    <script>
+        // Initialiser la carte
+        var map = L.map('map').setView([49.8948, 2.3026], 13);
+    
+        // Ajouter le fond de carte OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+    
+        // Ajouter un marqueur (point GPS interactif)
+        var marker = L.marker([49.8948, 2.3026]).addTo(map);
+        marker.bindPopup("<b>Amiens</b><br>Martel Pro").openPopup();
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const numberInput = document.getElementById("number");
+            const extraFields = document.getElementById("extra-fields");
+    
+            function updateFields() {
+                extraFields.innerHTML = ""; // Vide le conteneur
+                let count = parseInt(numberInput.value);
+    
+                for (let i = 1; i <= count; i++) {
+                    let div = document.createElement("div");
+                    div.classList.add("form-group");
+    
+                    let labelNom = document.createElement("label");
+                    labelNom.textContent = `Nom de la personne ${i} :`;
+                    let inputNom = document.createElement("input");
+                    inputNom.type = "text";
+                    inputNom.name = `nom_${i}`;
+                    inputNom.required = true;
+    
+                    let labelPrenom = document.createElement("label");
+                    labelPrenom.textContent = `Prénom de la personne ${i} :`;
+                    let inputPrenom = document.createElement("input");
+                    inputPrenom.type = "text";
+                    inputPrenom.name = `prenom_${i}`;
+                    inputPrenom.required = true;
+    
+                    div.appendChild(labelNom);
+                    div.appendChild(inputNom);
+                    div.appendChild(labelPrenom);
+                    div.appendChild(inputPrenom);
+    
+                    extraFields.appendChild(div);
+                }
+            }
+    
+            numberInput.addEventListener("input", updateFields);
+            updateFields(); // Mettre à jour au chargement initial
+        });
+    </script>    
+</body>
+</html>
